@@ -2,12 +2,14 @@ package kr.co.pjm.diving.zuul;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 
+@EnableZuulProxy
 @SpringBootApplication
-public class EnjoyDivingZuulApplication {
+public class Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(EnjoyDivingZuulApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 
 }

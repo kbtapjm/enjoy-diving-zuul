@@ -1,0 +1,84 @@
+server:
+  port: 8086
+  tomcat:
+    uri-encoding: UTF-8
+  error:
+    whitelabel:
+      enabled: false
+      
+spring:
+  application:
+    name: enjoy-diving-zuul
+  output:
+    ansi:
+      enabled: always
+  profiles:
+    active: dev
+  http:
+    encoding:
+      charset: UTF-8
+      
+security:
+  basic:
+    enabled: false
+    
+ribbon:
+  eureka:
+    enabled: false
+
+zuul:
+  sensitive-headers:
+  host:
+    connect-timeout-millis: 600000
+    socket-timeout-millis: 600000
+  routes:
+    foo-api:
+      path: /foos/**
+      url: http://localhost:8081
+      stripPrefix: false
+    bar-api:
+      path: /bars/**
+      url: http://localhost:8082
+      stripPrefix: false
+
+
+      
+---
+# local
+spring:
+  profiles: local
+logging:
+  level:
+    root: DEBUG 
+    org.apache: INFO
+    org.springframework.batch: DEBUG
+  config: classpath:config/logback-spring.xml
+  file : local
+  path : data/logs
+  
+---  
+
+# dev
+spring:
+  profiles: dev
+logging:
+  level:
+    root: DEBUG 
+    org.apache: INFO
+  config: classpath:config/logback-spring.xml
+  file : dev
+  path : data/logs
+
+
+---  
+
+# stg
+spring:
+  profiles: stg
+logging:
+  level:
+    root: DEBUG 
+    org.apache: INFO
+  config: classpath:config/logback-spring.xml
+  file : stg
+  path : data/logs

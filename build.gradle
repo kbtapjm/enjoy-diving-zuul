@@ -10,8 +10,13 @@ ext {
 }
 
 dependencies {
-	compile 'org.springframework.cloud:spring-cloud-starter-netflix-zuul'
-	testCompile 'org.springframework.boot:spring-boot-starter-test'
+	compile project(':enjoy-diving-common')
+
+	implementation('org.springframework.cloud:spring-cloud-starter-netflix-zuul') {
+        exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+    }
+    implementation('org.springframework.boot:spring-boot-starter-undertow')
+    implementation('org.springframework.cloud:spring-cloud-starter-netflix-ribbon')
 }
 
 dependencyManagement {
