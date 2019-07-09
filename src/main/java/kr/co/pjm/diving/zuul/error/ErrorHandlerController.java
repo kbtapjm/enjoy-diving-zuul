@@ -25,18 +25,14 @@ public class ErrorHandlerController implements ErrorController {
     RequestContext ctx = RequestContext.getCurrentContext();
     Object error = ExceptionUtils.getRootCause((Exception) ctx.get("throwable"));
 
-    // zuul.routes.{proxy}.path 에 정의되지 않은 요청일 경우 응답 처리
     if (error == null) {
-
       return new ResponseEntity<String>("NOT_FOUND", HttpStatus.NOT_FOUND);
     }
 
     if (error instanceof Exception) {
-
       return new ResponseEntity<String>("SERVICE_UNAVAILABLE", HttpStatus.SERVICE_UNAVAILABLE);
     }
 
-    // 예상되지 않은 오류일 경우 응답 처리
     return new ResponseEntity<String>("INTERNAL_SERVER_ERROR", HttpStatus.INTERNAL_SERVER_ERROR);
   }
 
